@@ -15,6 +15,7 @@ public class SpawnText : MonoBehaviour
     bool qstop = false;
     public static int qcount = 0;
     public static string fileName = "Assets/Saves/savefile.json";
+    public GameObject incorrectImg;
     
     // Start is called before the first frame update
     public void DisplayQuestion(string q){
@@ -34,6 +35,10 @@ public class SpawnText : MonoBehaviour
         }
         else{
             print("時間切れ！！");
+            GameObject obj = Instantiate(incorrectImg);
+            QuizField.corCount[SpawnText.qcount] = 0;
+            StartCoroutine(Answerbox.Countdown(3.0f));
+            Destroy(obj, 3);
             StartCoroutine(NextQ());
         }
     }
